@@ -49,7 +49,7 @@ namespace MVCCompanyDataAccess.Repo
         //Update
         public int Edit(Department department)
         {
-            _context.Departments.update(department);
+            _context.Departments.Update(department);
 
             return _context.SaveChanges();
         }

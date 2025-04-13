@@ -31,6 +31,6 @@ namespace MVCCompanyDataAccess.Contexts
         }
 
 
-        public System.Data.Entity.DbSet<Department> Departments { get; set; } = null!;
+        public Microsoft.EntityFrameworkCore.DbSet<Department> Departments { get; set; } = null!;
     }
 }
