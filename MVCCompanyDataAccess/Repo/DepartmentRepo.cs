@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MVCCompanyDataAccess.Repo
 {
-    internal class DepartmentRepo(Contexts.AppContext context) : IDepartmentRepo1
+    internal class DepartmentRepo(Contexts.AppContext context) : IDepartmentRepo
     {
         private readonly Contexts.AppContext _context = context;
         //Contain CRUP oprations
