@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVCCompanyDataAccess.Model
 {
-    internal class BaseClass
+    public class BaseClass
     {
 
         public int Id { get; set; }//pk

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace PresntaionLayer
 {
     public class Program
@@ -6,10 +8,17 @@ namespace PresntaionLayer
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            #region Add services to the container.
             builder.Services.AddControllersWithViews();
-
-
+            builder.Services.AddDbContext<MVCCompanyDataAccess.Contexts.AppContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                //options.UseSqlServer(builder.configuration["ConnectionStrings:DefaultConnection"]);
+            });
+            //make Dependency Injection for DepartmentRepo
+            builder.Services.AddScoped<MVCCompanyDataAccess.Repo.IDepartmentRepo, MVCCompanyDataAccess.Repo.DepartmentRepo>();
+            //make Dependency Injection for DepartmentServices
+            #endregion
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
