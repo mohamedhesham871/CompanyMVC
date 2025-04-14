@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MVCCompanyDataAccess.Model
 {
-    internal class Department : BaseClass
+    public class Department : BaseClass
     {
         public string Name { get; set; } = null!;
 

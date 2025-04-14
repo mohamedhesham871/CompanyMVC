@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCCompanyDataAccess.Contexts
 {
-    internal class AppContext:Microsoft.EntityFrameworkCore.DbContext
+    public class AppContext:Microsoft.EntityFrameworkCore.DbContext
     {
         public AppContext(DbContextOptions<AppContext> options) : base(options)
         {

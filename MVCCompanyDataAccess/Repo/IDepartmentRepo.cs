@@ -2,7 +2,7 @@
 
 namespace MVCCompanyDataAccess.Repo
 {
-    internal interface IDepartmentRepo
+    public interface IDepartmentRepo
     {
         int Add(Department department);
         int Delete(Department department);
