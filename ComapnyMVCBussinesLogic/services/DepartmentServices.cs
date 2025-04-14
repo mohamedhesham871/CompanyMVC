@@ -57,6 +57,20 @@ namespace ComapnyMVCBussinesLogic.services
             };
             return DetailsDept;
         }
+        //Create
+        public int? CreateDepartment(CreateDepartmentDto createDepartmentDto)
+        {
+            var department = new Department()
+            {
+                Name = createDepartmentDto.Name,
+                Code = createDepartmentDto.Code,
+                Description = createDepartmentDto.Description,
+                CreatedOn = createDepartmentDto.CreatedDate,
+                CreatedBy = 1, // Assuming 1 is the ID of the user creating the department  
+            };
+            var res=  _departmentRepo.Add(department);
+                return res;   
+        }
 
     }
 }

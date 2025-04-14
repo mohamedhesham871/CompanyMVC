@@ -26,7 +26,7 @@ namespace MVCCompanyDataAccess.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppContext).Assembly);// for all Configuration
             base.OnModelCreating(modelBuilder);
         }
 
