@@ -53,7 +53,7 @@ namespace ComapnyMVCBussinesLogic.services
             return DetailsDept;
         }
         //Create
-        public int? CreateDepartment(CreateDepartmentDto createDepartmentDto)
+        public int CreateDepartment(CreateDepartmentDto createDepartmentDto)
         {
             var department = new Department()
             {
