@@ -47,7 +47,19 @@ namespace PresntaionLayer.Controllers
 
             }
             return View(createDepartmentDto);
-        } 
+        }
         #endregion
+        //Just Get
+        [HttpGet]
+        public IActionResult Details(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            var department = _departmentServices.GetDepartmentById(id.Value);
+            if (department == null) return NotFound();
+            return View(department);
+
+        }
+
     }
 }
