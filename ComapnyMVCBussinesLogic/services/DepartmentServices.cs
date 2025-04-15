@@ -9,18 +9,13 @@ using ComapnyMVCBussinesLogic.Factory;
 using MVCCompanyDataAccess.Model;
 namespace ComapnyMVCBussinesLogic.services
 {
-    internal class DepartmentServices
+    public  class DepartmentServices(IDepartmentRepo departmentRepo) : IDepartmentServices
     {
         //Make CRUD with DepartmentRepo make it more secure
 
 
-        readonly private IDepartmentRepo _departmentRepo;
+        readonly private IDepartmentRepo _departmentRepo = departmentRepo;     // dependency Injection
 
-        public DepartmentServices(IDepartmentRepo departmentRepo)// dependency Injection
-        {
-            _departmentRepo = departmentRepo;
-            // DepartmentRepo   test two
-        }
 
         //Get All 
         public IEnumerable<DepartmentDto> GetAllDepartment()
@@ -42,8 +37,8 @@ namespace ComapnyMVCBussinesLogic.services
         {
             var department = _departmentRepo.GetByID(id);
             if (department == null) return null;
-    
-            var DetailsDept =new DepartmentDetailsDto()
+
+            var DetailsDept = new DepartmentDetailsDto()
             {
                 DeptId = department.Id,
                 Name = department.Name,
@@ -58,7 +53,7 @@ namespace ComapnyMVCBussinesLogic.services
             return DetailsDept;
         }
         //Create
-        public int? CreateDepartment(CreateDepartmentDto createDepartmentDto)
+        public int CreateDepartment(CreateDepartmentDto createDepartmentDto)
         {
             var department = new Department()
             {
@@ -68,8 +63,21 @@ namespace ComapnyMVCBussinesLogic.services
                 CreatedOn = createDepartmentDto.CreatedDate,
                 CreatedBy = 1, // Assuming 1 is the ID of the user creating the department  
             };
-            var res=  _departmentRepo.Add(department);
-                return res;   
+            var res = _departmentRepo.Add(department);
+            return res;
+        }
+        public int UpdateDepartment(UpdateDepartmentDto updateDepartmentDto)
+        {
+            var department = new Department()
+            {
+                Id=updateDepartmentDto.Id,
+                Name = updateDepartmentDto.Name,
+                Code = updateDepartmentDto.Code,
+                Description = updateDepartmentDto.Description,
+                CreatedOn = updateDepartmentDto.CreatedDate,
+            };
+            var res = _departmentRepo.Edit(department);
+            return res;
         }
 
     }
