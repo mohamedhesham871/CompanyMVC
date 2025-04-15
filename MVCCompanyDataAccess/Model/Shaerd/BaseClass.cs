@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVCCompanyDataAccess.Model
+namespace MVCCompanyDataAccess.Model.Shaerd
 {
     public class BaseClass
     {

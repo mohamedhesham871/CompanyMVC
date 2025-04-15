@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ComapnyMVCBussinesLogic.Dto;
-using MVCCompanyDataAccess.Repo;
 using ComapnyMVCBussinesLogic.Factory;
 using MVCCompanyDataAccess.Model;
 using System.ComponentModel.DataAnnotations;
+using MVCCompanyDataAccess.Repo.InterfaceRepo;
 namespace ComapnyMVCBussinesLogic.services
 {
     public  class DepartmentServices(IDepartmentRepo departmentRepo) : IDepartmentServices

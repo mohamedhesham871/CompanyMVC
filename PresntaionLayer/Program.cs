@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ComapnyMVCBussinesLogic.services;
-using MVCCompanyDataAccess.Repo;
+using MVCCompanyDataAccess.Repo.ClassRepo;
+using MVCCompanyDataAccess.Repo.InterfaceRepo;
 namespace PresntaionLayer
 {
     public class Program
