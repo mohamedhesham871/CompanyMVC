@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComapnyMVCBussinesLogic.Dto
 {
-    internal class CreateDepartmentDto
+    public class CreateDepartmentDto
     {
         public string Name { get; set; } = string.Empty;
 

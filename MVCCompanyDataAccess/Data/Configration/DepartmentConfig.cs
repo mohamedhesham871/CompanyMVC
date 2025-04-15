@@ -22,8 +22,6 @@ namespace MVCCompanyDataAccess.Data.Configration
             builder.Property(d => d.Description).HasMaxLength(200);
             builder.Property(d => d.CreatedOn).HasDefaultValueSql("GETDATE()");
             builder.Property(d => d.LastModifiiedOn).HasComputedColumnSql("GETDATE()");
-
-
         }
     }
    

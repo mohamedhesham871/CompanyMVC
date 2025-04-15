@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-
+using ComapnyMVCBussinesLogic.services;
+using MVCCompanyDataAccess.Repo;
 namespace PresntaionLayer
 {
     public class Program
@@ -16,8 +17,9 @@ namespace PresntaionLayer
                 //options.UseSqlServer(builder.configuration["ConnectionStrings:DefaultConnection"]);
             });
             //make Dependency Injection for DepartmentRepo
-            builder.Services.AddScoped<MVCCompanyDataAccess.Repo.IDepartmentRepo, MVCCompanyDataAccess.Repo.DepartmentRepo>();
+            builder.Services.AddScoped<IDepartmentRepo,DepartmentRepo>();
             //make Dependency Injection for DepartmentServices
+            builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
             #endregion
             var app = builder.Build();
 
@@ -30,7 +32,7 @@ namespace PresntaionLayer
             }
 
             app.UseHttpsRedirection();
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
