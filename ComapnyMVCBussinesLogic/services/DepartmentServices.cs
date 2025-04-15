@@ -66,10 +66,11 @@ namespace ComapnyMVCBussinesLogic.services
             var res = _departmentRepo.Add(department);
             return res;
         }
-        public int? UpdateDepartment(UpdateDepartmentDto updateDepartmentDto)
+        public int UpdateDepartment(UpdateDepartmentDto updateDepartmentDto)
         {
             var department = new Department()
             {
+                Id=updateDepartmentDto.Id,
                 Name = updateDepartmentDto.Name,
                 Code = updateDepartmentDto.Code,
                 Description = updateDepartmentDto.Description,

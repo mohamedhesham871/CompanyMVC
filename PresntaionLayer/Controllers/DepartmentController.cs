@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ComapnyMVCBussinesLogic.services;
 using ComapnyMVCBussinesLogic.Dto;
+using PresntaionLayer.ViewModels.DepartmentViewModels;
 namespace PresntaionLayer.Controllers
 {
-    public class DepartmentController (IDepartmentServices _departmentServices,ILogger<DepartmentController>_logger,IWebHostEnvironment _environment): Controller
+    public class DepartmentController(IDepartmentServices _departmentServices, ILogger<DepartmentController> _logger, IWebHostEnvironment _environment) : Controller
     {
         public IActionResult Index()
         {//GEt all Departments
             var departments = _departmentServices.GetAllDepartment();
             return View(departments);
-           
+
         }
         #region Create [Get / Post]
         [HttpGet]
@@ -49,6 +50,7 @@ namespace PresntaionLayer.Controllers
             return View(createDepartmentDto);
         }
         #endregion
+        #region Details [Get]
         //Just Get
         [HttpGet]
         public IActionResult Details(int? id)
@@ -60,6 +62,67 @@ namespace PresntaionLayer.Controllers
             return View(department);
 
         }
+        #endregion
+        #region Update [Get/Post]
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (!id.HasValue) return BadRequest();
+            var department = _departmentServices.GetDepartmentById(id.Value);
+            if (department == null) return NotFound();
+            // convert from Details to viewModels Edit class
+            var UpdateDepartment = new DepartmentViewModelEdit()
+            {
+            
+                Name = department.Name,
+                Code = department.Code,
+                Description=department.Description,
+                CreatedDate=department.CreatedDate
+            };
+            return View(UpdateDepartment);
+        }
+        [HttpPost]
+        public IActionResult Edit([FromRoute]int id, DepartmentViewModelEdit  departmentViewModelEdit)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                   
+                    // Convert ViewModel to DTO
+                    var updateDepartmentDto = new UpdateDepartmentDto
+                    {
+                        Id = id,
+                        Name = departmentViewModelEdit.Name,
+                        Code = departmentViewModelEdit.Code,
+                        Description = departmentViewModelEdit.Description,
+                        CreatedDate = departmentViewModelEdit.CreatedDate
+                    };
+                    int result = _departmentServices.UpdateDepartment(updateDepartmentDto);
+                    if (result > 0)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                    ModelState.AddModelError("", "Failed to update department");
+                }
+                catch (Exception ex)
+                {
+                    if (_environment.IsDevelopment())
+                    {
 
+                        ModelState.AddModelError("", ex.Message);
+                    }
+                    else
+                    {
+                        _logger.LogError(ex.Message);
+                            
+                    }
+                }
+
+            }
+            return View(departmentViewModelEdit);
+        }
+        #endregion
     }
 }

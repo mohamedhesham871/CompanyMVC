@@ -7,6 +7,6 @@ namespace ComapnyMVCBussinesLogic.services
         int CreateDepartment(CreateDepartmentDto createDepartmentDto);
         IEnumerable<DepartmentDto> GetAllDepartment();
         DepartmentDetailsDto? GetDepartmentById(int id);
-        int? UpdateDepartment(UpdateDepartmentDto updateDepartmentDto);
+        int UpdateDepartment(UpdateDepartmentDto updateDepartmentDto);
     }
 }
