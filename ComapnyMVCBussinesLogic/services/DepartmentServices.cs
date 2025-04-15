@@ -7,6 +7,7 @@ using ComapnyMVCBussinesLogic.Dto;
 using MVCCompanyDataAccess.Repo;
 using ComapnyMVCBussinesLogic.Factory;
 using MVCCompanyDataAccess.Model;
+using System.ComponentModel.DataAnnotations;
 namespace ComapnyMVCBussinesLogic.services
 {
     public  class DepartmentServices(IDepartmentRepo departmentRepo) : IDepartmentServices
@@ -80,5 +81,19 @@ namespace ComapnyMVCBussinesLogic.services
             return res;
         }
 
+        public bool DeleteDepartment(int id)
+        {
+            if(id == 0)   return false;
+  
+            var department = _departmentRepo.GetByID(id);
+            if (department == null) return false;
+            
+            else
+            {
+                var res= _departmentRepo.Delete(department);
+               return res>0?true:false;
+            }
+            
+        }
     }
 }
