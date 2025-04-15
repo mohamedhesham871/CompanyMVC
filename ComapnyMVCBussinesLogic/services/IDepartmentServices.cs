@@ -8,5 +8,7 @@ namespace ComapnyMVCBussinesLogic.services
         IEnumerable<DepartmentDto> GetAllDepartment();
         DepartmentDetailsDto? GetDepartmentById(int id);
         int UpdateDepartment(UpdateDepartmentDto updateDepartmentDto);
+        bool DeleteDepartment(int id);
+
     }
 }
