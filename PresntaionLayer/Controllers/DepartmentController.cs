@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ComapnyMVCBussinesLogic.services;
 using ComapnyMVCBussinesLogic.Dto;
 using PresntaionLayer.ViewModels.DepartmentViewModels;
 using MVCCompanyDataAccess.Model;
+using ComapnyMVCBussinesLogic.Dto.DepartmentDtos;
+using ComapnyMVCBussinesLogic.services.Interfaces;
 namespace PresntaionLayer.Controllers
 {
     public class DepartmentController(IDepartmentServices _departmentServices, ILogger<DepartmentController> _logger, IWebHostEnvironment _environment) : Controller

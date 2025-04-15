@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ComapnyMVCBussinesLogic.Dto;
 using ComapnyMVCBussinesLogic.Factory;
 using MVCCompanyDataAccess.Model;
 using System.ComponentModel.DataAnnotations;
 using MVCCompanyDataAccess.Repo.InterfaceRepo;
-namespace ComapnyMVCBussinesLogic.services
+using ComapnyMVCBussinesLogic.Dto.DepartmentDtos;
+using ComapnyMVCBussinesLogic.services.Interfaces;
+namespace ComapnyMVCBussinesLogic.services.Class
 {
-    public  class DepartmentServices(IDepartmentRepo departmentRepo) : IDepartmentServices
+    public class DepartmentServices(IDepartmentRepo departmentRepo) : IDepartmentServices
     {
         //Make CRUD with DepartmentRepo make it more secure
 
@@ -71,7 +72,7 @@ namespace ComapnyMVCBussinesLogic.services
         {
             var department = new Department()
             {
-                Id=updateDepartmentDto.Id,
+                Id = updateDepartmentDto.Id,
                 Name = updateDepartmentDto.Name,
                 Code = updateDepartmentDto.Code,
                 Description = updateDepartmentDto.Description,
@@ -83,17 +84,17 @@ namespace ComapnyMVCBussinesLogic.services
 
         public bool DeleteDepartment(int id)
         {
-            if(id == 0)   return false;
-  
+            if (id == 0) return false;
+
             var department = _departmentRepo.GetByID(id);
             if (department == null) return false;
-            
+
             else
             {
-                var res= _departmentRepo.Delete(department);
-               return res>0?true:false;
+                var res = _departmentRepo.Delete(department);
+                return res > 0 ? true : false;
             }
-            
+
         }
     }
 }

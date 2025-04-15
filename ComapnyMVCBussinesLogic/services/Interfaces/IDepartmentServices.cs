@@ -1,6 +1,6 @@
-﻿using ComapnyMVCBussinesLogic.Dto;
+﻿using ComapnyMVCBussinesLogic.Dto.DepartmentDtos;
 
-namespace ComapnyMVCBussinesLogic.services
+namespace ComapnyMVCBussinesLogic.services.Interfaces
 {
     public interface IDepartmentServices
     {
