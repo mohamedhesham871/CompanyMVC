@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using ComapnyMVCBussinesLogic.services;
 using MVCCompanyDataAccess.Repo.ClassRepo;
 using MVCCompanyDataAccess.Repo.InterfaceRepo;
+using ComapnyMVCBussinesLogic.services.Class;
+using ComapnyMVCBussinesLogic.services.Interfaces;
 namespace PresntaionLayer
 {
     public class Program
@@ -21,6 +22,8 @@ namespace PresntaionLayer
             builder.Services.AddScoped<IDepartmentRepo,DepartmentRepo>();
             //make Dependency Injection for DepartmentServices
             builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
+            builder.Services.AddScoped<IEmployeeRepo, EmployeeRepo>();
+            builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
             #endregion
             var app = builder.Build();
 

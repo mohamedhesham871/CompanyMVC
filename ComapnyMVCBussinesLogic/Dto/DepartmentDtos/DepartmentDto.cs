@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComapnyMVCBussinesLogic.Dto
+namespace ComapnyMVCBussinesLogic.Dto.DepartmentDtos
 {
     public class DepartmentDto
     {
