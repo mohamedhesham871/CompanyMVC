@@ -32,5 +32,6 @@ namespace MVCCompanyDataAccess.Contexts
 
 
         public Microsoft.EntityFrameworkCore.DbSet<Department> Departments { get; set; } = null!;
+        public Microsoft.EntityFrameworkCore.DbSet<Empolyee> empolyees { get; set; } = null!;
     }
 }
