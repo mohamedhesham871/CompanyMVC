@@ -51,5 +51,19 @@ namespace PresntaionLayer.Controllers
             return View(createEmployeeDto);
         }
         #endregion
+        #region Details [Get/Post]
+
+        public IActionResult Details(int? id)
+        {
+            if (!id.HasValue) return BadRequest();
+
+            var emp = _employeeServices.GetEmployeeById(id.Value);
+            if (emp == null) return NotFound();
+
+            return View(emp);
+
+        }
+      
+        #endregion
     }
 }
