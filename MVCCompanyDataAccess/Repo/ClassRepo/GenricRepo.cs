@@ -22,6 +22,7 @@ namespace MVCCompanyDataAccess.Repo.ClassRepo
             //GetAll      [GetAll]
 
            //GET ALL
+           //
         public IEnumerable<TEntity> GetAll(bool WithTracking = false)
         {
             if (WithTracking)
