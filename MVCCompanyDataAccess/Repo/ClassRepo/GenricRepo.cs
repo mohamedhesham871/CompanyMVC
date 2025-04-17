@@ -26,11 +26,11 @@ namespace MVCCompanyDataAccess.Repo.ClassRepo
         {
             if (WithTracking)
             {
-                return _context.Set<TEntity>().ToList();
+                return _context.Set<TEntity>().Where(e=>e.IsDeleted!=true).ToList();
             }
             else
             {
-                    return _context.Set<TEntity>().AsNoTracking().ToList();
+                    return _context.Set<TEntity>().Where(e => e.IsDeleted != true).AsNoTracking().ToList();
             }
         }
         //GET BY ID
