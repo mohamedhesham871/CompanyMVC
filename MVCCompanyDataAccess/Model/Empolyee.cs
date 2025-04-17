@@ -27,9 +27,9 @@ namespace MVCCompanyDataAccess.Model
         
         public DateTime HiringDate { get; set; }
         
-        public Gender gender { get; set; }
+        public Gender Gender { get; set; }
         
-        public EmployeeType employeeType { get; set; }
+        public EmployeeType EmployeeType { get; set; }
     }
 
 }

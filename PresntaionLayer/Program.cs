@@ -3,6 +3,7 @@ using MVCCompanyDataAccess.Repo.ClassRepo;
 using MVCCompanyDataAccess.Repo.InterfaceRepo;
 using ComapnyMVCBussinesLogic.services.Class;
 using ComapnyMVCBussinesLogic.services.Interfaces;
+using ComapnyMVCBussinesLogic.Profiles;
 namespace PresntaionLayer
 {
     public class Program
@@ -24,6 +25,10 @@ namespace PresntaionLayer
             builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
             builder.Services.AddScoped<IEmployeeRepo, EmployeeRepo>();
             builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
+
+
+           //builder.Services.AddAutoMapper(typeof(EmployeeProfile).Assembly);// All profiles
+            builder.Services.AddAutoMapper(p=>p.AddProfile(new EmployeeProfile()));
             #endregion
             var app = builder.Build();
 

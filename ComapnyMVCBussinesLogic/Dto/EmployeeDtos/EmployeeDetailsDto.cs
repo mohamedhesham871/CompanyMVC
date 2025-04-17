@@ -16,9 +16,9 @@ namespace ComapnyMVCBussinesLogic.Dto.EmployeeDtos
         public bool IsActive { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public DateOnly HiringDate { get; set; }
-        public string Gender { get; set; }
-        public string EmployeeType { get; set; }
+        public DateOnly HiringDate { get; set; }//Miss Match
+        public string Gender { get; set; }      //Miss Match
+        public string EmployeeType { get; set; }//Miss Match
         public int CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }
         public int LastModifiedBy { get; set; }

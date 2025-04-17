@@ -13,6 +13,9 @@ namespace ComapnyMVCBussinesLogic.services.Interfaces
     {
         IEnumerable<EmployeeDto> GetAllEmployees();
         public EmployeeDetailsDto? GetEmployeeById(int id);
+        public int CreateEmployee(CreateEmployeeDto createEmployeeDto);
+        public int UpdateEmployee(UpdateEmployeeDto updateEmployeeDto);
+        public bool DeleteEmployee(int id);
     }
 
 }
