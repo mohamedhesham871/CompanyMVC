@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MVCCompanyDataAccess.Data.Configration.DepartmentConfig;
+using MVCCompanyDataAccess.Data.Configration.EmployeeConfig;
 using MVCCompanyDataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -27,6 +29,11 @@ namespace MVCCompanyDataAccess.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppContext).Assembly);// for all Configuration
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DepartmentConfig).Assembly);// for specific Configuration
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(EmployeeConfig).Assembly);// for specific Configuration
+
+            modelBuilder.Entity<Department>().Ignore(e => e.LastModifiiedOn);
+
             base.OnModelCreating(modelBuilder);
         }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MVCCompanyDataAccess.Data.Configration.SharedConfig
 {
-    internal class SharedConfig<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : BaseClass
+    public class SharedConfig<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : BaseClass
     {
         public void Configure(EntityTypeBuilder<TEntity> builder)
         {

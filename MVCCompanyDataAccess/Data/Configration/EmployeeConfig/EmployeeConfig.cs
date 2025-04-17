@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MVCCompanyDataAccess.Data.Configration.EmployeeConfig
 {
-    internal class EmployeeConfig : SharedConfig<Empolyee> ,IEntityTypeConfiguration<Empolyee>
+    public class EmployeeConfig : SharedConfig<Empolyee> ,IEntityTypeConfiguration<Empolyee>
     {
         public void Configure(EntityTypeBuilder<Empolyee> builder)
         {
@@ -33,12 +33,12 @@ namespace MVCCompanyDataAccess.Data.Configration.EmployeeConfig
             
             builder.Property(nameof(Empolyee.PhoneNumber)).HasColumnType("varchar(11)");
 
-            builder.Property(e => e.gender).HasConversion(
+            builder.Property(e => e.Gender).HasConversion(
                 convertToProviderExpression: valueToAddInDb => valueToAddInDb.ToString(),
                 convertFromProviderExpression: valueToReadFromDb => (Gender)Enum.Parse(typeof(Gender), valueToReadFromDb)
             );
 
-            builder.Property(e=>e.employeeType)
+            builder.Property(e=>e.EmployeeType)
                 .HasConversion(
                                ValueToAddInDB => ValueToAddInDB.ToString(),
                                 valueToReadInDB => (EmployeeType)Enum.Parse(typeof(EmployeeType), valueToReadInDB)
