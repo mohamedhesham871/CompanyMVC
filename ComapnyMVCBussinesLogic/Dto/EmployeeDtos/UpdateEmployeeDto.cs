@@ -33,5 +33,6 @@ namespace ComapnyMVCBussinesLogic.Dto.EmployeeDtos
         public DateOnly HiringDate { get; set; }
         public Gender Gender { get; set; }
         public EmployeeType EmployeeType { get; set; }
+        public int? departmentId { set; get; } // make it later Required
     }
 }

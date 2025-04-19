@@ -14,5 +14,8 @@ namespace MVCCompanyDataAccess.Model
         public string Code { get; set; } = null!;
 
         public string? Description { get; set; }
+        #region Relation one to many employee
+        public virtual ICollection<Empolyee> Employees { get; set; } = new HashSet<Empolyee>();
+        #endregion
     }
 }

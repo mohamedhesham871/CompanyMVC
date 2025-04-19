@@ -17,7 +17,8 @@
                 <th>@Html.DisplayNameFor(e => e.Age)</th>
                 <th>@Html.DisplayNameFor(e => e.Salary)</th>
                 <th>@Html.DisplayNameFor(e => e.IsActive)</th>
-                <th>@Html.DisplayNameFor(e => e.Gender)</th>
+                <th>@Html.DisplayNameFor(e => e.Gender)</th>  
+                <th>@Html.DisplayNameFor(e => e.departmentName)</th>
                 <th>Details </th>
                 <th>Update</th>
                 <th>Delete</th>
@@ -34,8 +35,9 @@
                     <td>@employee.Age</td>
                     <td>@Html.DisplayFor(e=>employee.Salary)</td>
                    <td><i class ="fa @(@employee.IsActive?"fa-solid fa-circle-check text-success" :"fa-solid fa-circle-xmark text-danger")"></i></td>
-            
+
                     <td>@employee.Gender</td>
+                    <td>@(string.IsNullOrWhiteSpace(@employee.departmentName)?"No Department":@employee.departmentName)</td>
 
                @*Shared Button View[Edit/Details]*@
                     <partial name="ButtonPartialView" model="@employee.Id" />
