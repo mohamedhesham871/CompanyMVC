@@ -22,7 +22,12 @@ namespace MVCCompanyDataAccess.Data.Configration.DepartmentConfig
             builder.Property(d => d.Code).IsRequired().HasMaxLength(30);
             builder.Property(d => d.Description).HasMaxLength(200);
 
-             }
+            builder.HasMany(d => d.Employees)
+                .WithOne(e => e.department)
+                .HasForeignKey(e => e.DepartmentId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+        }
     }
 
 

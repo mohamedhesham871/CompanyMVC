@@ -30,6 +30,12 @@ namespace MVCCompanyDataAccess.Model
         public Gender Gender { get; set; }
         
         public EmployeeType EmployeeType { get; set; }
+
+        #region Relation work  [one employee to one Department ]
+        //fk
+        public int? DepartmentId { set; get; } // make it later Required
+        public Department? department { set; get; } // make it later Required 
+        #endregion
     }
 
 }

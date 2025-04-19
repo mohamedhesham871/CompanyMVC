@@ -10,7 +10,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
       @*Partial View HERE*@
-      <partial name="SharedView/SharedCreateEditView" model="Model" />
+        <partial name="PartialViews/CreateEditEmployeeView" model="Model" />
         <div class="mt-4 m-auto">
             <input class="btn btn-success" type="submit" value="Edit" />
             <a asp-controller="Department" asp-action="Index" class="btn btn-outline-dark">Back to list</a>

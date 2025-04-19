@@ -2,11 +2,15 @@
 using ComapnyMVCBussinesLogic.services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MVCCompanyDataAccess.Model.Enums;
+using PresntaionLayer.ViewModels.EmployeesViewModels;
 using System.Runtime.InteropServices.Marshalling;
 
 namespace PresntaionLayer.Controllers
 {
-    public class EmployeesController(IEmployeeServices _employeeServices ,ILogger<EmployeesController>_logger,IWebHostEnvironment _environment) : Controller
+    public class EmployeesController(IEmployeeServices _employeeServices ,
+        ILogger<EmployeesController>_logger,
+        IDepartmentServices _departmentServices
+        , IWebHostEnvironment _environment) : Controller
     {
         public IActionResult Index()
         {
@@ -23,14 +27,29 @@ namespace PresntaionLayer.Controllers
         }
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public IActionResult create(CreateEmployeeDto createEmployeeDto)
+        public IActionResult create(CreateEditEmpViewModel _createEditEmpViewModel)
         {
             if(ModelState.IsValid)
             {
                 try
                 {
+                    var createEmployeeDto = new CreateEmployeeDto()
+                    {
+                        Name=_createEditEmpViewModel.Name,
+                        Age = _createEditEmpViewModel.Age,
+                        Address = _createEditEmpViewModel.Address,
+                        Salary = _createEditEmpViewModel.Salary,
+                        IsActive = _createEditEmpViewModel.IsActive,
+                        Email = _createEditEmpViewModel.Email,
+                        PhoneNumber = _createEditEmpViewModel.PhoneNumber,
+                        departmentId = _createEditEmpViewModel.departmentId,
+                        Gender= _createEditEmpViewModel.Gender,
+                        EmployeeType = _createEditEmpViewModel.EmployeeType,
+                        HiringDate = _createEditEmpViewModel.HiringDate
+                        //Convert From CreateEditEmpViewModel to CreateEmployeeDto
+                    };
                     int emp = _employeeServices.CreateEmployee(createEmployeeDto);
-
+                   
                     if (emp > 0) return RedirectToAction("Index");
                     else
                     {
@@ -50,7 +69,7 @@ namespace PresntaionLayer.Controllers
                 }
 
             }
-            return View(createEmployeeDto);
+            return View(_createEditEmpViewModel);
         }
         #endregion
         #region Details [Get]
@@ -76,9 +95,8 @@ namespace PresntaionLayer.Controllers
             
             if (emp == null) return NotFound();
             //Convert From EmployeeDetailsDto to UpdateEmployeeDto
-            var EditEmp = new UpdateEmployeeDto()
+            var EditEmp = new CreateEditEmpViewModel()
             {
-                Id = emp.Id,
                 Name = emp.Name,
                 Age = emp.Age,
                 Address = emp.Address,
@@ -88,22 +106,39 @@ namespace PresntaionLayer.Controllers
                 Email = emp.Email,
                 IsActive = emp.IsActive,
                 Gender = Enum.Parse<Gender>(emp.Gender),
-                EmployeeType = Enum.Parse<EmployeeType>(emp.EmployeeType)
+                EmployeeType = Enum.Parse<EmployeeType>(emp.EmployeeType),
+                departmentId = emp.departmentId,
             };
-
+            if (EditEmp == null) return NotFound();
             
             return View(EditEmp);
         }
         [HttpPost]
         // Recommed using ViewModel Not this Way
-        public IActionResult Edit(int? id, UpdateEmployeeDto updateEmployeeDto)
+        public IActionResult Edit([FromRoute]int? id, CreateEditEmpViewModel _createEditEmpViewModel)
         {
-            if (!id.HasValue|| id!=updateEmployeeDto.Id) return BadRequest();
+            if (!id.HasValue) return BadRequest();
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    //convert From modelView to UpdateEmployeeDto
+                    var updateEmployeeDto = new UpdateEmployeeDto()
+                    {
+                        Id = id.Value,
+                        Name = _createEditEmpViewModel.Name,
+                        Age = _createEditEmpViewModel.Age,
+                        Address = _createEditEmpViewModel.Address,
+                        Salary = _createEditEmpViewModel.Salary,
+                        IsActive = _createEditEmpViewModel.IsActive,
+                        Email = _createEditEmpViewModel.Email,
+                        PhoneNumber = _createEditEmpViewModel.PhoneNumber,
+                        departmentId = _createEditEmpViewModel.departmentId,
+                        Gender = _createEditEmpViewModel.Gender,
+                        EmployeeType = _createEditEmpViewModel.EmployeeType,
+                        HiringDate = _createEditEmpViewModel.HiringDate
+                    };
                     var emp = _employeeServices.UpdateEmployee( updateEmployeeDto);
 
                     if (emp > 0) return RedirectToAction("Index");
@@ -124,7 +159,7 @@ namespace PresntaionLayer.Controllers
                     }
                 }
             }
-            return View(updateEmployeeDto);
+            return View(_createEditEmpViewModel);
         }
         #endregion
         #region Delete [Post]
