@@ -10,6 +10,8 @@ namespace PresntaionLayer.Controllers
     {
         public IActionResult Index()
         {//GEt all Departments
+            ViewData["Test01"]= "this is Test on Viewdata";
+            ViewBag.Test02 = "This is Test on ViewBag";
             var departments = _departmentServices.GetAllDepartment();
             return View(departments);
 
@@ -21,18 +23,36 @@ namespace PresntaionLayer.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(CreateDepartmentDto createDepartmentDto)
+        public IActionResult Create(CreateEditViewModel createEditViewModel)
         {
             if (ModelState.IsValid)
             {
+                //Convert ViewModel to DTO
+                var createDepartmentDto = new CreateDepartmentDto
+                {
+                    Name = createEditViewModel.Name,
+                    Code = createEditViewModel.Code,
+                    Description = createEditViewModel.Description,
+                    CreatedDate = createEditViewModel.CreatedDate
+                };
                 try
                 {
                     int result = _departmentServices.CreateDepartment(createDepartmentDto);
-                    if (result > 0)
-                    {
-                        return RedirectToAction("Index");
-                    }
-                    ModelState.AddModelError("", "Failed to create department");
+                    var message = string.Empty;
+                    //Best Practice 
+                    //if (result > 0)
+                    //{
+                    //    return RedirectToAction("Index");
+                    //}
+                    //ModelState.AddModelError("", "Failed to create department");
+
+                    //Wil test on TempView
+                    if (result > 0) message = "Create Department Successfully";
+                    else message = "Department Can't be Created";
+                    TempData["messageToClient"] = message;
+
+                    return RedirectToAction("Index");
+
                 }
                 catch (Exception ex)
                 {
@@ -49,7 +69,7 @@ namespace PresntaionLayer.Controllers
 
 
             }
-            return View(createDepartmentDto);
+            return View(createEditViewModel);
         }
         #endregion
         #region Details [Get]
@@ -73,7 +93,7 @@ namespace PresntaionLayer.Controllers
             var department = _departmentServices.GetDepartmentById(id.Value);
             if (department == null) return NotFound();
             // convert from Details to viewModels Edit class
-            var UpdateDepartment = new DepartmentViewModelEdit()
+            var UpdateDepartment = new CreateEditViewModel()
             {
 
                 Name = department.Name,
@@ -84,7 +104,7 @@ namespace PresntaionLayer.Controllers
             return View(UpdateDepartment);
         }
         [HttpPost]
-        public IActionResult Edit([FromRoute] int id, DepartmentViewModelEdit departmentViewModelEdit)
+        public IActionResult Edit([FromRoute] int id, CreateEditViewModel departmentViewModelEdit)
         {
 
             if (ModelState.IsValid)
