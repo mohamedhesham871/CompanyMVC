@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MVCCompanyDataAccess.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateEmplyoee : Migration
+    public partial class CreateEmployee : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
