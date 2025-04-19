@@ -4,6 +4,7 @@ using MVCCompanyDataAccess.Repo.InterfaceRepo;
 using ComapnyMVCBussinesLogic.services.Class;
 using ComapnyMVCBussinesLogic.services.Interfaces;
 using ComapnyMVCBussinesLogic.Profiles;
+using Microsoft.AspNetCore.Mvc;
 namespace PresntaionLayer
 {
     public class Program
@@ -13,7 +14,9 @@ namespace PresntaionLayer
             var builder = WebApplication.CreateBuilder(args);
 
             #region Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(
+                option => option.Filters.Add(new AutoValidateAntiforgeryTokenAttribute())
+                );
             builder.Services.AddDbContext<MVCCompanyDataAccess.Contexts.AppContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));

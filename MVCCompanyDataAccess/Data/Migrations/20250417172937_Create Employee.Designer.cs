@@ -13,8 +13,8 @@ using AppContext = MVCCompanyDataAccess.Contexts.AppContext;
 namespace MVCCompanyDataAccess.Data.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20250417124929_Create Emplyoee")]
-    partial class CreateEmplyoee
+    [Migration("20250417172937_Create Employee")]
+    partial class CreateEmployee
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

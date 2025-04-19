@@ -21,6 +21,7 @@ namespace PresntaionLayer.Controllers
             return View();
 
         }
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public IActionResult create(CreateEmployeeDto createEmployeeDto)
         {
