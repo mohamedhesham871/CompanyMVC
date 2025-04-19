@@ -20,6 +20,7 @@ namespace PresntaionLayer
             builder.Services.AddDbContext<MVCCompanyDataAccess.Contexts.AppContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseLazyLoadingProxies();
                 //options.UseSqlServer(builder.configuration["ConnectionStrings:DefaultConnection"]);
             });
             //make Dependency Injection for DepartmentRepo

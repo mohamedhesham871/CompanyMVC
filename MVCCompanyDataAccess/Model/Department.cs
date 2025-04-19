@@ -15,7 +15,7 @@ namespace MVCCompanyDataAccess.Model
 
         public string? Description { get; set; }
         #region Relation one to many employee
-        public ICollection<Empolyee> Employees { get; set; } = new HashSet<Empolyee>();
+        public virtual ICollection<Empolyee> Employees { get; set; } = new HashSet<Empolyee>();
         #endregion
     }
 }

@@ -34,7 +34,7 @@ namespace MVCCompanyDataAccess.Model
         #region Relation work  [one employee to one Department ]
         //fk
         public int? DepartmentId { set; get; } // make it later Required
-        public Department? department { set; get; } // make it later Required 
+        public virtual Department? department { set; get; } // make it later Required 
         #endregion
     }
 
