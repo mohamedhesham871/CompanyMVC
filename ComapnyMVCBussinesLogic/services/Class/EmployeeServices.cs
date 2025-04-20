@@ -2,6 +2,7 @@
 using Azure;
 using ComapnyMVCBussinesLogic.Dto.EmployeeDtos;
 using ComapnyMVCBussinesLogic.services.Interfaces;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using MVCCompanyDataAccess.Model;
 using MVCCompanyDataAccess.Model.Enums;
@@ -24,31 +25,23 @@ namespace ComapnyMVCBussinesLogic.services.Class
         // Has Two Ways to map
         // _mapper.Map<Destination>(source);
         // _mapper.map<Source,Destination>(source);
-
-
-        //Get All
-        IEnumerable<EmployeeDto> IEmployeeServices.GetAllEmployees()
+        #region Get All
+        IEnumerable<EmployeeDto> IEmployeeServices.GetAllEmployees(string? filter)
         {
-            var employees = employeeRepo.GetAll();
+            IEnumerable<Empolyee> employees;
+            if (string.IsNullOrWhiteSpace(filter))
+            {
+                employees = employeeRepo.GetAll();
+            }
+             else    employees = employeeRepo.GetAll(e=>e.Name.ToLower().Contains(filter.ToLower()) );
+            
             if (employees == null) return null;
 
-            //var result = employees.Select(x => new EmployeeDto()
-            //{
-            //    Id = x.Id,
-            //    Name = x.Name,
-            //    Age = x.Age,
-            //    Salary = x.Salary,
-            //    Email = x.Email,
-            //    IsActive = x.IsActive,
-            //    EmployeeType = x.employeeType.ToString(),
-            //    Gender = x.gender.ToString()
-            //}).ToList();
-
-           
             //Convert From IEnumerable<Employee> to IEnumerable<EmployeeDto>
-            return _mapper.Map<IEnumerable<EmployeeDto>>(employees) ;
+            return _mapper.Map<IEnumerable<EmployeeDto>>(employees);
         }
-
+     
+        #endregion
         //Get By ID
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
@@ -87,6 +80,8 @@ namespace ComapnyMVCBussinesLogic.services.Class
             var res = employeeRepo.Edit(emp);//update
             return res> 0 ? true : false;
         }
+
+       
     }
 
 }
