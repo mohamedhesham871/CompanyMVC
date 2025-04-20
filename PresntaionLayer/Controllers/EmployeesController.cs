@@ -12,9 +12,9 @@ namespace PresntaionLayer.Controllers
         IDepartmentServices _departmentServices
         , IWebHostEnvironment _environment) : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string? EmployeeSearchName)
         {
-            var employees = _employeeServices.GetAllEmployees();
+            var employees = _employeeServices.GetAllEmployees(EmployeeSearchName);
 
             return View(employees);
         }

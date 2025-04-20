@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using MVCCompanyDataAccess.Model;
@@ -34,6 +35,14 @@ namespace MVCCompanyDataAccess.Repo.ClassRepo
                     return _context.Set<TEntity>().Where(e => e.IsDeleted != true).AsNoTracking().ToList();
             }
         }
+        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter)
+        {
+            return _context.Set<TEntity>()
+                .Where(e => e.IsDeleted != true)
+                .Where(filter).ToList();
+        }
+        
+        
         //GET BY ID
         public TEntity? GetByID(int id)
         {
@@ -61,6 +70,6 @@ namespace MVCCompanyDataAccess.Repo.ClassRepo
             return _context.SaveChanges();
         }
 
-
+        
     }
 }

@@ -3,6 +3,7 @@ using MVCCompanyDataAccess.Model.Shaerd;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace MVCCompanyDataAccess.Repo.InterfaceRepo
         int Delete(TEnttiy _TEnttiy);
         int Edit(TEnttiy _TEnttiy);
         IEnumerable<TEnttiy> GetAll(bool WithTracking = false);
+        IEnumerable<TEnttiy> GetAll(Expression<Func<TEnttiy ,bool>>filter);
         TEnttiy? GetByID(int id);
     }
 }
