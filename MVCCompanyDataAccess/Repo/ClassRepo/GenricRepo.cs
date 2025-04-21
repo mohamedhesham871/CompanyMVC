@@ -14,25 +14,26 @@ namespace MVCCompanyDataAccess.Repo.ClassRepo
     public class GenricRepo<TEntity>(Contexts.AppContext context) : IGenricRepo<TEntity> where TEntity : BaseClass
     {
         private readonly Contexts.AppContext _context = context;
-    
-            //Contain CRUP oprations
-            //Create      [Add]
-            //Read        [GetByID]
-            //Update      [Edit]
-            //Delete      [Delete]
-            //GetAll      [GetAll]
 
-           //GET ALL
-           //
+        //Contain CRUP oprations
+        //Create      [Add]
+        //Read        [GetByID]
+        //Update      [Edit]
+        //Delete      [Delete]
+        //GetAll      [GetAll]
+
+        //GET ALL
+        //
+        #region GET
         public IEnumerable<TEntity> GetAll(bool WithTracking = false)
         {
             if (WithTracking)
             {
-                return _context.Set<TEntity>().Where(e=>e.IsDeleted!=true).ToList();
+                return _context.Set<TEntity>().Where(e => e.IsDeleted != true).ToList();
             }
             else
             {
-                    return _context.Set<TEntity>().Where(e => e.IsDeleted != true).AsNoTracking().ToList();
+                return _context.Set<TEntity>().Where(e => e.IsDeleted != true).AsNoTracking().ToList();
             }
         }
         public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> filter)
@@ -41,8 +42,8 @@ namespace MVCCompanyDataAccess.Repo.ClassRepo
                 .Where(e => e.IsDeleted != true)
                 .Where(filter).ToList();
         }
-        
-        
+
+
         //GET BY ID
         public TEntity? GetByID(int id)
         {
@@ -50,24 +51,26 @@ namespace MVCCompanyDataAccess.Repo.ClassRepo
             return _context.Set<TEntity>().FirstOrDefault(x => x.Id == id);
         }
 
+        #endregion
+
         //Add [Create]
-        public int Add(TEntity entity)
+        public void Add(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);
-            return _context.SaveChanges();
+            
         }
         //Update
-        public int Edit(TEntity entity)
+        public void Edit(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
 
-            return _context.SaveChanges();
+           
         }
         //Delete
-        public int Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
-            return _context.SaveChanges();
+           
         }
 
         

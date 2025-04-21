@@ -1,6 +1,6 @@
 ﻿using ComapnyMVCBussinesLogic.Dto.DepartmentDtos;
 using ComapnyMVCBussinesLogic.Dto.EmployeeDtos;
-using MVCCompanyDataAccess.Repo.InterfaceRepo;
+using MVCCompanyDataAccess.Repo.UintOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;

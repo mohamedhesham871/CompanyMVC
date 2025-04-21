@@ -1,14 +1,15 @@
 ﻿using ComapnyMVCBussinesLogic.Dto.DepartmentDtos;
-
+using MVCCompanyDataAccess.Repo.UintOfWork;
 namespace ComapnyMVCBussinesLogic.services.Interfaces
 {
     public interface IDepartmentServices
     {
-        int CreateDepartment(CreateDepartmentDto createDepartmentDto);
-        IEnumerable<DepartmentDto> GetAllDepartment();
-        DepartmentDetailsDto? GetDepartmentById(int id);
-        int UpdateDepartment(UpdateDepartmentDto updateDepartmentDto);
-        bool DeleteDepartment(int id);
+       
+         IEnumerable<DepartmentDto> GetAllDepartment();
+       public  DepartmentDetailsDto? GetDepartmentById(int id);
+       public int CreateDepartment(CreateDepartmentDto createDepartmentDto);
+       public int UpdateDepartment(UpdateDepartmentDto updateDepartmentDto);
+       public bool DeleteDepartment(int id);
 
     }
 }

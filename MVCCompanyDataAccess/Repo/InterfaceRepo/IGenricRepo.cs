@@ -12,9 +12,9 @@ namespace MVCCompanyDataAccess.Repo.InterfaceRepo
     public  interface IGenricRepo<TEnttiy> where TEnttiy : BaseClass
   
     {
-        int Add(TEnttiy _TEnttiy);
-        int Delete(TEnttiy _TEnttiy);
-        int Edit(TEnttiy _TEnttiy);
+        void Add(TEnttiy _TEnttiy);
+        void Delete(TEnttiy _TEnttiy);
+        void Edit(TEnttiy _TEnttiy);
         IEnumerable<TEnttiy> GetAll(bool WithTracking = false);
         IEnumerable<TEnttiy> GetAll(Expression<Func<TEnttiy ,bool>>filter);
         TEnttiy? GetByID(int id);

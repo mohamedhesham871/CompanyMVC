@@ -5,6 +5,7 @@ using ComapnyMVCBussinesLogic.services.Class;
 using ComapnyMVCBussinesLogic.services.Interfaces;
 using ComapnyMVCBussinesLogic.Profiles;
 using Microsoft.AspNetCore.Mvc;
+using MVCCompanyDataAccess.Repo.UintOfWork;
 namespace PresntaionLayer
 {
     public class Program
@@ -24,14 +25,14 @@ namespace PresntaionLayer
                 //options.UseSqlServer(builder.configuration["ConnectionStrings:DefaultConnection"]);
             });
             //make Dependency Injection for DepartmentRepo
-            builder.Services.AddScoped<IDepartmentRepo,DepartmentRepo>();
+            builder.Services.AddScoped<IDepartmentRepo,DepartmentRepo>(); //used lazy loading in UnitOfWork
+            builder.Services.AddScoped<IEmployeeRepo, EmployeeRepo>();  //  used lazy loading in UnitOfWork
             //make Dependency Injection for DepartmentServices
             builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
-            builder.Services.AddScoped<IEmployeeRepo, EmployeeRepo>();
             builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
-           //builder.Services.AddAutoMapper(typeof(EmployeeProfile).Assembly);// All profiles
+            //builder.Services.AddAutoMapper(typeof(EmployeeProfile).Assembly);// All profiles
             builder.Services.AddAutoMapper(p=>p.AddProfile(new EmployeeProfile()));
             #endregion
             var app = builder.Build();
