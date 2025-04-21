@@ -1,4 +1,5 @@
-﻿using MVCCompanyDataAccess.Model.Enums;
+﻿using Microsoft.AspNetCore.Http;
+using MVCCompanyDataAccess.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,6 +35,7 @@ namespace ComapnyMVCBussinesLogic.Dto.EmployeeDtos
         public DateOnly HiringDate { get; set; }
         public Gender Gender { get; set; }
         public EmployeeType EmployeeType { get; set; }
-        public int? departmentId { set; get; } // make it later Required    
+        public int? departmentId { set; get; } // make it later Required
+        public IFormFile? Image { get; set; }
     }
 }

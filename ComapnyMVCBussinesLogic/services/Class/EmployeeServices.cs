@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azure;
 using ComapnyMVCBussinesLogic.Dto.EmployeeDtos;
+using ComapnyMVCBussinesLogic.services.AttachmentServices;
 using ComapnyMVCBussinesLogic.services.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
@@ -18,7 +19,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ComapnyMVCBussinesLogic.services.Class
 {
-    public class EmployeeServices(IUnitOfWork unitOfWork,IMapper _mapper) : IEmployeeServices
+    public class EmployeeServices(IUnitOfWork unitOfWork,IAttachmentServices _attachmentServices,IMapper _mapper) : IEmployeeServices
     {
         private readonly IUnitOfWork unitOfWork = unitOfWork;
        
@@ -58,6 +59,8 @@ namespace ComapnyMVCBussinesLogic.services.Class
         {
             // convert from CreateEmployeeDto to Employee
             var emp = _mapper.Map<Empolyee>(createEmployeeDto);
+            var imageName = _attachmentServices.Upload(createEmployeeDto.Image,"Images");
+            emp.ImageName = imageName;
             unitOfWork.EmployeeRepo.Add(emp);
             return unitOfWork.SaveChanges() ;
         }

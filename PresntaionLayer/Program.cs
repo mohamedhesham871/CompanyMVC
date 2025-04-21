@@ -6,6 +6,7 @@ using ComapnyMVCBussinesLogic.services.Interfaces;
 using ComapnyMVCBussinesLogic.Profiles;
 using Microsoft.AspNetCore.Mvc;
 using MVCCompanyDataAccess.Repo.UintOfWork;
+using ComapnyMVCBussinesLogic.services.AttachmentServices;
 namespace PresntaionLayer
 {
     public class Program
@@ -31,6 +32,7 @@ namespace PresntaionLayer
             builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
             builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IAttachmentServices, AttachmentServices >();
 
             //builder.Services.AddAutoMapper(typeof(EmployeeProfile).Assembly);// All profiles
             builder.Services.AddAutoMapper(p=>p.AddProfile(new EmployeeProfile()));

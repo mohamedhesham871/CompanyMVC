@@ -23,4 +23,8 @@
     <ProjectReference Include="..\ComapnyMVCBussinesLogic\ComapnyMVCBussinesLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Files\Images\" />
+  </ItemGroup>
+
 </Project>
