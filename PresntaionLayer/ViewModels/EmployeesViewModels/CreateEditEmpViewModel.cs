@@ -29,6 +29,7 @@ namespace PresntaionLayer.ViewModels.EmployeesViewModels
         public EmployeeType EmployeeType { get; set; }
         [Display(Name = "Department")]
         public int? departmentId { set; get; } // make it later Required
-       
+        public IFormFile? Image { get; set; }
+
     }
 }

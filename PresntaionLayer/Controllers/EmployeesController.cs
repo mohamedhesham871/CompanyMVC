@@ -45,7 +45,9 @@ namespace PresntaionLayer.Controllers
                         departmentId = _createEditEmpViewModel.departmentId,
                         Gender= _createEditEmpViewModel.Gender,
                         EmployeeType = _createEditEmpViewModel.EmployeeType,
-                        HiringDate = _createEditEmpViewModel.HiringDate
+                        HiringDate = _createEditEmpViewModel.HiringDate,
+                        Image=_createEditEmpViewModel.Image
+                        
                         //Convert From CreateEditEmpViewModel to CreateEmployeeDto
                     };
                     int emp = _employeeServices.CreateEmployee(createEmployeeDto);

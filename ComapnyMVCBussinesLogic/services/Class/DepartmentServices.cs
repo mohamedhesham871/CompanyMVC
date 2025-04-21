@@ -6,23 +6,25 @@ using System.Threading.Tasks;
 using ComapnyMVCBussinesLogic.Factory;
 using MVCCompanyDataAccess.Model;
 using System.ComponentModel.DataAnnotations;
-using MVCCompanyDataAccess.Repo.InterfaceRepo;
 using ComapnyMVCBussinesLogic.Dto.DepartmentDtos;
 using ComapnyMVCBussinesLogic.services.Interfaces;
+using MVCCompanyDataAccess.Repo.UintOfWork;
 namespace ComapnyMVCBussinesLogic.services.Class
 {
-    public class DepartmentServices(IDepartmentRepo departmentRepo) : IDepartmentServices
+    public class DepartmentServices(IUnitOfWork unitOfWork) : IDepartmentServices
     {
         //Make CRUD with DepartmentRepo make it more secure
 
 
-        readonly private IDepartmentRepo _departmentRepo = departmentRepo;     // dependency Injection
+      ///  readonly private IDepartmentRepo _departmentRepo = departmentRepo;     // dependency Injection
+     //   private readonly IUnitOfWork unitOfWork = unitOfWork;                     // dependency Injection
 
 
         //Get All 
         public IEnumerable<DepartmentDto> GetAllDepartment()
         {
-            var departments = _departmentRepo.GetAll();
+           
+            var departments = unitOfWork.DepartmentRepo.GetAll();
             var departmentsDto = departments.Select(x => new DepartmentDto()
             {
                 DeptId = x.Id,
@@ -37,7 +39,7 @@ namespace ComapnyMVCBussinesLogic.services.Class
         //Get By ID
         public DepartmentDetailsDto? GetDepartmentById(int id)
         {
-            var department = _departmentRepo.GetByID(id);
+            var department = unitOfWork.DepartmentRepo.GetByID(id);
             if (department == null) return null;
 
             var DetailsDept = new DepartmentDetailsDto()
@@ -65,8 +67,8 @@ namespace ComapnyMVCBussinesLogic.services.Class
                 CreatedOn = createDepartmentDto.CreatedDate,
                 CreatedBy = 1, // Assuming 1 is the ID of the user creating the department  
             };
-            var res = _departmentRepo.Add(department);
-            return res;
+               unitOfWork.DepartmentRepo.Add(department);
+            return unitOfWork.SaveChanges();
         }
         public int UpdateDepartment(UpdateDepartmentDto updateDepartmentDto)
         {
@@ -78,21 +80,21 @@ namespace ComapnyMVCBussinesLogic.services.Class
                 Description = updateDepartmentDto.Description,
                 CreatedOn = updateDepartmentDto.CreatedDate,
             };
-            var res = _departmentRepo.Edit(department);
-            return res;
+          unitOfWork.DepartmentRepo.Edit(department);
+            return unitOfWork.SaveChanges();
         }
 
         public bool DeleteDepartment(int id)
         {
             if (id == 0) return false;
 
-            var department = _departmentRepo.GetByID(id);
+            var department = unitOfWork.DepartmentRepo.GetByID(id);
             if (department == null) return false;
 
             else
             {
-                var res = _departmentRepo.Delete(department);
-                return res > 0 ? true : false;
+                 unitOfWork.DepartmentRepo.Delete(department);
+                return unitOfWork.SaveChanges()> 0 ? true : false;
             }
 
         }

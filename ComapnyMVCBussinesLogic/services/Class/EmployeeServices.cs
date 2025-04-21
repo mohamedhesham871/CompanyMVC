@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Azure;
 using ComapnyMVCBussinesLogic.Dto.EmployeeDtos;
+using ComapnyMVCBussinesLogic.services.AttachmentServices;
 using ComapnyMVCBussinesLogic.services.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using MVCCompanyDataAccess.Model;
 using MVCCompanyDataAccess.Model.Enums;
-using MVCCompanyDataAccess.Repo.ClassRepo;
-using MVCCompanyDataAccess.Repo.InterfaceRepo;
+using MVCCompanyDataAccess.Repo.UintOfWork;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -19,9 +19,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ComapnyMVCBussinesLogic.services.Class
 {
-    public class EmployeeServices(IEmployeeRepo employeeRepo,IMapper _mapper) : IEmployeeServices
+    public class EmployeeServices(IUnitOfWork unitOfWork,IAttachmentServices _attachmentServices,IMapper _mapper) : IEmployeeServices
     {
-
+        private readonly IUnitOfWork unitOfWork = unitOfWork;
+       
+        
         // Has Two Ways to map
         // _mapper.Map<Destination>(source);
         // _mapper.map<Source,Destination>(source);
@@ -31,9 +33,9 @@ namespace ComapnyMVCBussinesLogic.services.Class
             IEnumerable<Empolyee> employees;
             if (string.IsNullOrWhiteSpace(filter))
             {
-                employees = employeeRepo.GetAll();
+                employees = unitOfWork.EmployeeRepo.GetAll();
             }
-             else    employees = employeeRepo.GetAll(e=>e.Name.ToLower().Contains(filter.ToLower()) );
+             else    employees = unitOfWork.EmployeeRepo.GetAll(e=>e.Name.ToLower().Contains(filter.ToLower()) );
             
             if (employees == null) return null;
 
@@ -45,7 +47,7 @@ namespace ComapnyMVCBussinesLogic.services.Class
         //Get By ID
         public EmployeeDetailsDto? GetEmployeeById(int id)
         {
-            var emp = employeeRepo.GetByID(id);
+            var emp = unitOfWork.EmployeeRepo.GetByID(id);
             if (emp == null) return null;
 
             // convert from Employee to EmployeeDetailsDto
@@ -57,8 +59,10 @@ namespace ComapnyMVCBussinesLogic.services.Class
         {
             // convert from CreateEmployeeDto to Employee
             var emp = _mapper.Map<Empolyee>(createEmployeeDto);
-
-            return employeeRepo.Add(emp); ;
+            var imageName = _attachmentServices.Upload(createEmployeeDto.Image,"Images");
+            emp.ImageName = imageName;
+            unitOfWork.EmployeeRepo.Add(emp);
+            return unitOfWork.SaveChanges() ;
         }
 
         //Update Employee
@@ -67,18 +71,19 @@ namespace ComapnyMVCBussinesLogic.services.Class
          
             // convert from UpdateEmployeeDto to Employee
            var  emp = _mapper.Map<Empolyee>(updateEmployeeDto);
+                unitOfWork.EmployeeRepo.Edit(emp);
+            return unitOfWork.SaveChanges();
 
-            return employeeRepo.Edit(emp);
         }
 
         public bool DeleteEmployee(int id)
         {
             //[Soft Delete] 
-            var emp = employeeRepo.GetByID(id);
+            var emp = unitOfWork.EmployeeRepo.GetByID(id);
             if (emp == null) return false;
              emp.IsDeleted = true;
-            var res = employeeRepo.Edit(emp);//update
-            return res> 0 ? true : false;
+            unitOfWork.EmployeeRepo.Edit(emp);//update
+            return unitOfWork.SaveChanges()> 0 ? true : false;
         }
 
        

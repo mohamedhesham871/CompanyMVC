@@ -22,5 +22,6 @@ namespace ComapnyMVCBussinesLogic.Dto.EmployeeDtos
         [Display(Name = "Employee Type")]
         public string EmployeeType { get; set; }
         public string? departmentName { get; set; }
+        
     }
 }

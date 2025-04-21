@@ -9,26 +9,26 @@ using System.Threading.Tasks;
 
 namespace MVCCompanyDataAccess.Model
 {
-    public class Empolyee:BaseClass
-    {       
+    public class Empolyee : BaseClass
+    {
         public string Name { get; set; } = null!;
-        
+
         public int Age { get; set; }
-        
-        public string? Address { get; set; } 
-        
+
+        public string? Address { get; set; }
+
         public bool IsActive { get; set; }
-        
+
         public decimal Salary { get; set; }
-        
-        public string ?Email { get; set; } 
-        
-        public string ?PhoneNumber { get; set; }
-        
+
+        public string? Email { get; set; }
+
+        public string? PhoneNumber { get; set; }
+
         public DateTime HiringDate { get; set; }
-        
+
         public Gender Gender { get; set; }
-        
+
         public EmployeeType EmployeeType { get; set; }
 
         #region Relation work  [one employee to one Department ]
@@ -36,6 +36,6 @@ namespace MVCCompanyDataAccess.Model
         public int? DepartmentId { set; get; } // make it later Required
         public virtual Department? department { set; get; } // make it later Required 
         #endregion
+        public string? ImageName { get; set; }
     }
-
 }

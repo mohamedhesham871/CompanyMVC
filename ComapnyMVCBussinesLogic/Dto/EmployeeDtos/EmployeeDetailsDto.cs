@@ -26,6 +26,7 @@ namespace ComapnyMVCBussinesLogic.Dto.EmployeeDtos
 
         public string? DepartmentName { get; set; }
         public int? departmentId { get; set; }
-        
+        public string? ImageName { get; set; }
+
     }
 }
