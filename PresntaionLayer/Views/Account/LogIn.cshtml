@@ -1,0 +1,30 @@
+﻿@model LogInViewModel
+@{
+    ViewData["Title"] = "LogIn";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+<h1>LogIn</h1>
+<div class="main-w3layouts wrapper">
+	<h1>Mohamed Hesham Elkady Site</h1>
+	<div class="main-agileinfo">
+		<div class="agileits-top">
+			<form asp-action="LogIn" method="post">
+				<div asp-validation-summary="All"></div>
+
+
+				<input type="text" asp-for="Email" placeholder="Email" required="">
+				<br />
+				<input class="text" type="password" asp-for="Password" placeholder="Password" required="">
+				<div class="wthree-text">
+					<label class="anim">
+						<input class="checkbox" asp-for="IsRemember" required="">
+						<span>Remember Me</span>
+					</label>
+					<div class="clear"> </div>
+				</div>
+				<input type="submit" value="LogIn">
+			</form>
+			<p>Have an Account? <a asp-action="Register"> Login Now!</a></p>
+		</div>
+	</div>
+</div>
