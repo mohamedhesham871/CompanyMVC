@@ -1,5 +1,6 @@
 ﻿using ComapnyMVCBussinesLogic.Dto.EmployeeDtos;
 using ComapnyMVCBussinesLogic.services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVCCompanyDataAccess.Model.Enums;
 using PresntaionLayer.ViewModels.EmployeesViewModels;
@@ -7,7 +8,9 @@ using System.Runtime.InteropServices.Marshalling;
 
 namespace PresntaionLayer.Controllers
 {
-    public class EmployeesController(IEmployeeServices _employeeServices ,
+	[Authorize]
+
+	public class EmployeesController(IEmployeeServices _employeeServices ,
         ILogger<EmployeesController>_logger,
         IDepartmentServices _departmentServices
         , IWebHostEnvironment _environment) : Controller

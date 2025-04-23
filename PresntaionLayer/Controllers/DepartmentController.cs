@@ -4,11 +4,14 @@ using PresntaionLayer.ViewModels.DepartmentViewModels;
 using MVCCompanyDataAccess.Model;
 using ComapnyMVCBussinesLogic.Dto.DepartmentDtos;
 using ComapnyMVCBussinesLogic.services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 namespace PresntaionLayer.Controllers
 {
     public class DepartmentController(IDepartmentServices _departmentServices, ILogger<DepartmentController> _logger, IWebHostEnvironment _environment) : Controller
     {
-        public IActionResult Index()
+		[Authorize]
+
+		public IActionResult Index()
         {//GEt all Departments
             ViewData["Test01"]= "this is Test on Viewdata";
             ViewBag.Test02 = "This is Test on ViewBag";

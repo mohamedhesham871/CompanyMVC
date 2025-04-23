@@ -3,13 +3,16 @@
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
-
+<h1>Register</h1>
 <div class="main-w3layouts wrapper">
 	<h1>Mohamed Hesham Elkady Site</h1>
 	<div class="main-agileinfo">
 		<div class="agileits-top">
-			<form action="Register" method="post">
+			<form asp-action="Register" method="post">
 				<div asp-validation-summary="All"></div>
+
+
+
 				<input type="text" asp-for="FirstName" placeholder="First Name" required="">
 				<br />
 				<input type="text" asp-for="LastName" placeholder="Last Name" required="">
@@ -28,7 +31,7 @@
 				</div>
 				<input type="submit" value="Register">
 			</form>
-			<p>Have an Account? <a href="LogIn"> Login Now!</a></p>
+			<p>Have an Account? <a asp-action="LogIn"> Login Now!</a></p>
 		</div>
 	</div>
 </div>
