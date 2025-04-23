@@ -8,7 +8,7 @@ using MVCCompanyDataAccess.Repo.ClassRepo;
 using MVCCompanyDataAccess.Repo.InterfaceRepo;
 namespace MVCCompanyDataAccess.Repo.ClassRepo
 {
-    public class EmployeeRepo(Contexts.AppContext context) : GenricRepo<Empolyee>(context), IEmployeeRepo
+    public class EmployeeRepo(Contexts.ApplicationDBContext context) : GenricRepo<Empolyee>(context), IEmployeeRepo
     {
     }
 }

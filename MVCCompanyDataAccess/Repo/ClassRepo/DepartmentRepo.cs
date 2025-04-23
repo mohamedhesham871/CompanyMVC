@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MVCCompanyDataAccess.Repo.ClassRepo
 {
-    public class DepartmentRepo(Contexts.AppContext context) :GenricRepo<Department>(context), IDepartmentRepo
+    public class DepartmentRepo(Contexts.ApplicationDBContext context) :GenricRepo<Department>(context), IDepartmentRepo
     {
         
     }

@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using AppContext = MVCCompanyDataAccess.Contexts.AppContext;
+using ApplicationDBContext = MVCCompanyDataAccess.Contexts.ApplicationDBContext;
 
 #nullable disable
 
 namespace MVCCompanyDataAccess.Data.Migrations
 {
-    [DbContext(typeof(AppContext))]
+    [DbContext(typeof(ApplicationDBContext))]
     [Migration("20250421135755_AddImageCoulmn")]
     partial class AddImageCoulmn
     {

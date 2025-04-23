@@ -15,11 +15,11 @@ namespace MVCCompanyDataAccess.Repo.UintOfWork
         //use Lazy to laod class when needed
         private readonly Lazy<IEmployeeRepo> employeeRepo;
         private readonly Lazy<IDepartmentRepo>departmentRepo;
-        private readonly Contexts.AppContext context;
+        private readonly Contexts.ApplicationDBContext context;
 
         public UnitOfWork(IEmployeeRepo employeeRepo ,
                          IDepartmentRepo departmentRepo,
-                         Contexts.AppContext _context)
+                         Contexts.ApplicationDBContext _context)
         {
             context = _context;
            this.employeeRepo = new Lazy<IEmployeeRepo> (()=>new EmployeeRepo(_context) );

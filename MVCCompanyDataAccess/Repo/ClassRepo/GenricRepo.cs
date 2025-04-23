@@ -11,9 +11,9 @@ using MVCCompanyDataAccess.Repo.InterfaceRepo;
 
 namespace MVCCompanyDataAccess.Repo.ClassRepo
 {
-    public class GenricRepo<TEntity>(Contexts.AppContext context) : IGenricRepo<TEntity> where TEntity : BaseClass
+    public class GenricRepo<TEntity>(Contexts.ApplicationDBContext context) : IGenricRepo<TEntity> where TEntity : BaseClass
     {
-        private readonly Contexts.AppContext _context = context;
+        private readonly Contexts.ApplicationDBContext _context = context;
 
         //Contain CRUP oprations
         //Create      [Add]
