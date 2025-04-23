@@ -1,0 +1,34 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<div class="main-w3layouts wrapper">
+	<h1>Mohamed Hesham Elkady Site</h1>
+	<div class="main-agileinfo">
+		<div class="agileits-top">
+			<form action="Register" method="post">
+				<div asp-validation-summary="All"></div>
+				<input type="text" asp-for="FirstName" placeholder="First Name" required="">
+				<br />
+				<input type="text" asp-for="LastName" placeholder="Last Name" required="">
+				<br />
+				<input type="text" asp-for="UserName" placeholder="User Name" required="">
+		
+				<input class="text email" type="email" asp-for="Email" placeholder="Email" required="">
+				<input class="text" type="password" asp-for="Password" placeholder="Password" required="">
+				<input class="text w3lpass" type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" required="">
+				<div class="wthree-text">
+					<label class="anim">
+						<input class="checkbox" asp-for="isAgree" required="">
+						<span>I Agree To The Terms & Conditions</span>
+					</label>
+					<div class="clear"> </div>
+				</div>
+				<input type="submit" value="Register">
+			</form>
+			<p>Have an Account? <a href="LogIn"> Login Now!</a></p>
+		</div>
+	</div>
+</div>

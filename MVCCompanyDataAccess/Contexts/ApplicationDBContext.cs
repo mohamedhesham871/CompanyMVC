@@ -7,14 +7,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MVCCompanyDataAccess.Contexts
 {
-    public class AppContext:Microsoft.EntityFrameworkCore.DbContext
+    public class ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : IdentityDbContext<ApplicationUser>(options)
     {
-        public AppContext(DbContextOptions<AppContext> options) : base(options)
-        {
-        }
+        
+        //public AppContext : base(options)
+        //{
+        //}
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
@@ -24,10 +26,14 @@ namespace MVCCompanyDataAccess.Contexts
         //    }
         //}
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppContext).Assembly);// for all Configuration
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDBContext).Assembly);// for all Configuration
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DepartmentConfig).Assembly);// for specific Configuration
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(EmployeeConfig).Assembly);// for specific Configuration
 

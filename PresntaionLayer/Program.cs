@@ -7,6 +7,9 @@ using ComapnyMVCBussinesLogic.Profiles;
 using Microsoft.AspNetCore.Mvc;
 using MVCCompanyDataAccess.Repo.UintOfWork;
 using ComapnyMVCBussinesLogic.services.AttachmentServices;
+using MVCCompanyDataAccess.Model;
+using Microsoft.AspNetCore.Identity;
+using MVCCompanyDataAccess.Contexts;
 namespace PresntaionLayer
 {
     public class Program
@@ -19,7 +22,7 @@ namespace PresntaionLayer
             builder.Services.AddControllersWithViews(
                 option => option.Filters.Add(new AutoValidateAntiforgeryTokenAttribute())
                 );
-            builder.Services.AddDbContext<MVCCompanyDataAccess.Contexts.AppContext>(options =>
+            builder.Services.AddDbContext<MVCCompanyDataAccess.Contexts.ApplicationDBContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
                 options.UseLazyLoadingProxies();
@@ -36,6 +39,8 @@ namespace PresntaionLayer
 
             //builder.Services.AddAutoMapper(typeof(EmployeeProfile).Assembly);// All profiles
             builder.Services.AddAutoMapper(p=>p.AddProfile(new EmployeeProfile()));
+            builder.Services.AddIdentity<ApplicationUser,IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDBContext>();
             #endregion
             var app = builder.Build();
 
@@ -56,7 +61,7 @@ namespace PresntaionLayer
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Register}/{id?}");
 
             app.Run();
         }
