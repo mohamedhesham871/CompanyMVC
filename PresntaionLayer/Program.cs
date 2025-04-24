@@ -40,7 +40,8 @@ namespace PresntaionLayer
             //builder.Services.AddAutoMapper(typeof(EmployeeProfile).Assembly);// All profiles
             builder.Services.AddAutoMapper(p=>p.AddProfile(new EmployeeProfile()));
             builder.Services.AddIdentity<ApplicationUser,IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDBContext>();
+                .AddEntityFrameworkStores<ApplicationDBContext>()
+                .AddDefaultTokenProviders();
             #endregion
             var app = builder.Build();
 
@@ -62,7 +63,7 @@ namespace PresntaionLayer
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=Register}/{id?}");
+                pattern: "{controller=Account}/{action=LogIn}/{id?}");
 
             app.Run();
         }
